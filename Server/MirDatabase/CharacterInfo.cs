@@ -61,6 +61,7 @@ namespace Server.MirDatabase
         public PetMode PMode;
         public bool AllowGroup;
         public bool AllowTrade;
+        public bool AllowObserve;
 
         public int PKPoints;
 
@@ -243,6 +244,9 @@ namespace Server.MirDatabase
 
             if (Envir.LoadVersion > 30)
                 AllowTrade = reader.ReadBoolean();
+
+            if (Envir.LoadVersion > 77)
+                AllowObserve = reader.ReadBoolean();
 
             if (Envir.LoadVersion > 33)
             {
@@ -473,6 +477,8 @@ namespace Server.MirDatabase
             writer.Write(GuildIndex);
 
             writer.Write(AllowTrade);
+
+            writer.Write(AllowObserve);
 
             writer.Write(CurrentQuests.Count);
             for (int i = 0; i < CurrentQuests.Count; i++)
